@@ -8,7 +8,7 @@ export class AwsCdkEksctlStack extends cdk.Stack {
     super(scope, id, props);
 
     const queue = new sqs.Queue(this, 'AwsCdkEksctlQueue', {
-      visibilityTimeout: cdk.Duration.seconds(300)
+      visibilityTimeout: cdk.Duration.seconds(300),
     });
 
     const topic = new sns.Topic(this, 'AwsCdkEksctlTopic');

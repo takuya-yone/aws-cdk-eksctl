@@ -4,13 +4,13 @@ import * as AwsCdkEksctl from '../lib/aws-cdk-eksctl-stack';
 
 test('SQS Queue Created', () => {
   const app = new cdk.App();
-    // WHEN
+  // WHEN
   const stack = new AwsCdkEksctl.AwsCdkEksctlStack(app, 'MyTestStack');
-    // THEN
+  // THEN
   const template = Template.fromStack(stack);
 
   template.hasResourceProperties('AWS::SQS::Queue', {
-    VisibilityTimeout: 300
+    VisibilityTimeout: 300,
   });
 });
 
