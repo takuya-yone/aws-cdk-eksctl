@@ -32,9 +32,6 @@ export class EksVpcStack extends cdk.Stack {
 
     // //////////////////  Security Group //////////////////
 
-    const proxyIP1 = '0.0.0.0/32';
-    // const proxyIP2 = '0.0.0.0/32';
-
     //// public security group
     this.publicSecurityGroup = new ec2.SecurityGroup(this, 'PublicSG', {
       vpc: this.vpc,
@@ -55,15 +52,7 @@ export class EksVpcStack extends cdk.Stack {
       ec2.Port.allTraffic()
     );
     this.publicSecurityGroup.addIngressRule(
-      ec2.Peer.ipv4(proxyIP1),
-      ec2.Port.allTraffic()
-    );
-    this.publicSecurityGroup.addIngressRule(
       this.privateSecurityGroup,
-      ec2.Port.allTraffic()
-    );
-    this.publicSecurityGroup.addIngressRule(
-      ec2.Peer.ipv4(this.vpc.vpcCidrBlock),
       ec2.Port.allTraffic()
     );
 
@@ -76,11 +65,6 @@ export class EksVpcStack extends cdk.Stack {
       this.publicSecurityGroup,
       ec2.Port.allTraffic()
     );
-    this.privateSecurityGroup.addIngressRule(
-      ec2.Peer.ipv4(this.vpc.vpcCidrBlock),
-      ec2.Port.allTraffic()
-    );
-
     ////////////////// ////////////////// //////////////////
 
     const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
