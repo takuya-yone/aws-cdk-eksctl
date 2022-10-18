@@ -32,6 +32,8 @@ export class EksVpcStack extends cdk.Stack {
 
     // //////////////////  Security Group //////////////////
 
+    const myip = '8.8.8.8/32';
+
     //// public security group
     this.publicSecurityGroup = new ec2.SecurityGroup(this, 'PublicSG', {
       vpc: this.vpc,
@@ -53,6 +55,10 @@ export class EksVpcStack extends cdk.Stack {
     );
     this.publicSecurityGroup.addIngressRule(
       this.privateSecurityGroup,
+      ec2.Port.allTraffic()
+    );
+    this.publicSecurityGroup.addIngressRule(
+      ec2.Peer.ipv4(myip),
       ec2.Port.allTraffic()
     );
 
@@ -117,6 +123,25 @@ export class EksVpcStack extends cdk.Stack {
         securityGroups: [this.privateSecurityGroup],
       }
     );
+
+    const SSMEndpoint = this.vpc.addInterfaceEndpoint('SSMEndpoint', {
+      service: ec2.InterfaceVpcEndpointAwsService.SSM,
+      subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+      securityGroups: [this.privateSecurityGroup],
+    });
+
+    const SSMMessagesEndpoint = this.vpc.addInterfaceEndpoint('SSMMessagesEndpoint', {
+      service: ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES,
+      subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+      securityGroups: [this.privateSecurityGroup],
+    });
+
+
+    const EC2MessagesEndpoint = this.vpc.addInterfaceEndpoint('EC2MessagesEndpoint', {
+      service: ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES,
+      subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+      securityGroups: [this.privateSecurityGroup],
+    });
 
     const S3GatewayEndpoint = this.vpc.addGatewayEndpoint('S3GatewayEndpoint', {
       service: ec2.GatewayVpcEndpointAwsService.S3,

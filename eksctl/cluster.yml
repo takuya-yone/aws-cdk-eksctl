@@ -54,7 +54,7 @@ privateCluster:
 vpc:
   clusterEndpoints:
     privateAccess: true
-    publicAccess: true
+    publicAccess: false
   manageSharedNodeSecurityGroupRules: true
   nat:
     gateway: Disable
