@@ -12,7 +12,7 @@ nodeGroups:
   bottlerocket:
     settings: {}
   containerRuntime: dockerd
-  desiredCapacity: 3
+  desiredCapacity: 0
   disableIMDSv1: false
   disablePodIMDS: false
   iam:
@@ -49,12 +49,12 @@ nodeGroups:
   volumeThroughput: 125
   volumeType: gp3
 privateCluster:
-  enabled: false
+  enabled: true
   skipEndpointCreation: true
 vpc:
-  clusterEndpoints:
-    privateAccess: true
-    publicAccess: false
+  # clusterEndpoints:
+  #   privateAccess: true
+  #   publicAccess: false
   manageSharedNodeSecurityGroupRules: true
   nat:
     gateway: Disable
@@ -62,7 +62,7 @@ vpc:
     private:
       ap-northeast-1a:
         az: ap-northeast-1a
-        id: subnet-0db0d65571bbfd2f1
+        id: subnet-0e11e5ef981c4aac4
       ap-northeast-1c:
         az: ap-northeast-1c
-        id: subnet-0c41634d3fbd84072
+        id: subnet-07b78112b564d2896

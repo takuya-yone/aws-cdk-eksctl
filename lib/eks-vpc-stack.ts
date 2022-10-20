@@ -17,11 +17,11 @@ export class EksVpcStack extends cdk.Stack {
       cidr: vpcCidr,
       natGateways: 0,
       subnetConfiguration: [
-        {
-          cidrMask: 24,
-          name: 'public',
-          subnetType: ec2.SubnetType.PUBLIC,
-        },
+        // {
+        //   cidrMask: 24,
+        //   name: 'public',
+        //   subnetType: ec2.SubnetType.PUBLIC,
+        // },
         {
           cidrMask: 24,
           name: 'private-isolated',
@@ -32,7 +32,7 @@ export class EksVpcStack extends cdk.Stack {
 
     // //////////////////  Security Group //////////////////
 
-    const myip = '8.8.8.8/32';
+    // const myip = '8.8.8.8/32';
 
     //// public security group
     this.publicSecurityGroup = new ec2.SecurityGroup(this, 'PublicSG', {
@@ -58,7 +58,7 @@ export class EksVpcStack extends cdk.Stack {
       ec2.Port.allTraffic()
     );
     this.publicSecurityGroup.addIngressRule(
-      ec2.Peer.ipv4(myip),
+      ec2.Peer.ipv4(vpcCidr),
       ec2.Port.allTraffic()
     );
 
@@ -71,6 +71,11 @@ export class EksVpcStack extends cdk.Stack {
       this.publicSecurityGroup,
       ec2.Port.allTraffic()
     );
+    this.privateSecurityGroup.addIngressRule(
+      ec2.Peer.ipv4(vpcCidr),
+      ec2.Port.allTraffic()
+    );
+    
     ////////////////// ////////////////// //////////////////
 
     const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
