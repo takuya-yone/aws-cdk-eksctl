@@ -3,23 +3,17 @@ iam:
   vpcResourceControllerPolicy: true
   withOIDC: false
 kind: ClusterConfig
-metadata:
-  name: EKS-Private-Sandbox-Cluster
-  region: ap-northeast-1
-  version: "1.23"
-nodeGroups:
+managedNodeGroups:
 - amiFamily: Bottlerocket
   bottlerocket:
     settings: {}
-  containerRuntime: dockerd
-  desiredCapacity: 0
   disableIMDSv1: false
   disablePodIMDS: false
   iam:
     withAddonPolicies:
       albIngress: false
-      appMesh: null
-      appMeshPreview: null
+      appMesh: false
+      appMeshPreview: false
       autoScaler: false
       awsLoadBalancerController: true
       certManager: false
@@ -34,27 +28,35 @@ nodeGroups:
   instanceType: t3.small
   labels:
     alpha.eksctl.io/cluster-name: EKS-Private-Sandbox-Cluster
-    alpha.eksctl.io/nodegroup-name: private-bottlerocket-ng
-    role: workers
-  name: private-bottlerocket-ng
+    alpha.eksctl.io/nodegroup-name: managed-bottlerocket-ng
+  maxSize: 2
+  minSize: 1
+  desiredCapacity: 2
+  name: managed-bottlerocket-ng
   privateNetworking: true
+  releaseVersion: ""
   securityGroups:
-    withLocal: true
-    withShared: true
+    withLocal: null
+    withShared: null
   ssh:
     allow: false
+    publicKeyPath: ""
+  tags:
+    alpha.eksctl.io/nodegroup-name: managed-bottlerocket-ng
+    alpha.eksctl.io/nodegroup-type: managed
   volumeIOPS: 3000
   volumeName: /dev/xvdb
   volumeSize: 20
   volumeThroughput: 125
   volumeType: gp3
+metadata:
+  name: EKS-Private-Sandbox-Cluster
+  region: ap-northeast-1
+  version: "1.23"
 privateCluster:
   enabled: true
   skipEndpointCreation: true
 vpc:
-  # clusterEndpoints:
-  #   privateAccess: true
-  #   publicAccess: false
   manageSharedNodeSecurityGroupRules: true
   nat:
     gateway: Disable
