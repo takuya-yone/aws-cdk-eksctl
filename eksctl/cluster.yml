@@ -64,7 +64,7 @@ vpc:
     private:
       ap-northeast-1a:
         az: ap-northeast-1a
-        id: subnet-0e11e5ef981c4aac4
+        id: subnet-0561f71c8daef3904
       ap-northeast-1c:
         az: ap-northeast-1c
-        id: subnet-07b78112b564d2896
+        id: subnet-020b46fe950624929
