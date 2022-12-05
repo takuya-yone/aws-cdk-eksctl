@@ -13,39 +13,41 @@ export class EksVpcStack extends cdk.Stack {
 
     const vpcCidr = '10.0.0.0/16';
 
-    this.vpc = new ec2.Vpc(this, 'EKS-Sandbox-VPC', {
+    this.vpc = new ec2.Vpc(this, 'Sandbox-EKS-VPC', {
       cidr: vpcCidr,
-      natGateways: 0,
+      natGateways: 2,
+      maxAzs: 2,
       subnetConfiguration: [
-        // {
-        //   cidrMask: 24,
-        //   name: 'public',
-        //   subnetType: ec2.SubnetType.PUBLIC,
-        // },
         {
           cidrMask: 24,
-          name: 'private-isolated',
-          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+          name: 'public',
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
+        {
+          cidrMask: 24,
+          name: 'private-with-nat',
+          subnetType: ec2.SubnetType.PRIVATE_WITH_NAT,
         },
       ],
     });
 
     // //////////////////  Security Group //////////////////
 
-    // const myip = '8.8.8.8/32';
+    const proxyIP1 = '0.0.0.0/32';
+    // const proxyIP2 = '0.0.0.0/32';
 
     //// public security group
-    this.publicSecurityGroup = new ec2.SecurityGroup(this, 'PublicSG', {
+    this.publicSecurityGroup = new ec2.SecurityGroup(this, 'Sandbox-EKS-PublicSG', {
       vpc: this.vpc,
       // allowAllOutbound: false,
-      securityGroupName: 'PublicSG',
+      securityGroupName: 'Sandbox-EKS-PublicSG',
     });
 
     //// private security group
-    this.privateSecurityGroup = new ec2.SecurityGroup(this, 'PrivateSG', {
+    this.privateSecurityGroup = new ec2.SecurityGroup(this, 'Sandbox-EKS-PrivateSG', {
       vpc: this.vpc,
       // allowAllOutbound: false,
-      securityGroupName: 'PrivateSG',
+      securityGroupName: 'Sandbox-EKS-PrivateSG',
     });
 
     //// public security group Rule
@@ -54,13 +56,17 @@ export class EksVpcStack extends cdk.Stack {
       ec2.Port.allTraffic()
     );
     this.publicSecurityGroup.addIngressRule(
-      this.privateSecurityGroup,
+      ec2.Peer.ipv4(proxyIP1),
       ec2.Port.allTraffic()
     );
     this.publicSecurityGroup.addIngressRule(
-      ec2.Peer.ipv4(vpcCidr),
+      this.privateSecurityGroup,
       ec2.Port.allTraffic()
     );
+    // this.publicSecurityGroup.addIngressRule(
+    //   ec2.Peer.ipv4(this.vpc.vpcCidrBlock),
+    //   ec2.Port.allTraffic()
+    // );
 
     //// private security group Rule
     this.privateSecurityGroup.addIngressRule(
@@ -71,86 +77,67 @@ export class EksVpcStack extends cdk.Stack {
       this.publicSecurityGroup,
       ec2.Port.allTraffic()
     );
-    this.privateSecurityGroup.addIngressRule(
-      ec2.Peer.ipv4(vpcCidr),
-      ec2.Port.allTraffic()
-    );
-    
+    //  this.privateSecurityGroup.addIngressRule(
+    //     ec2.Peer.ipv4(this.vpc.vpcCidrBlock),
+    //     ec2.Port.allTraffic()
+    //   );
+
     ////////////////// ////////////////// //////////////////
 
-    const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
-      'EC2InterfaceEndpoint',
-      {
-        service: ec2.InterfaceVpcEndpointAwsService.EC2,
-        subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-        securityGroups: [this.privateSecurityGroup],
-      }
-    );
+    // const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'EC2InterfaceEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.EC2,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
 
-    const ECRInterfaceEndpoint = this.vpc.addInterfaceEndpoint(
-      'ECRInterfaceEndpoint',
-      {
-        service: ec2.InterfaceVpcEndpointAwsService.ECR,
-        subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-        securityGroups: [this.privateSecurityGroup],
-      }
-    );
+    // const ECRInterfaceEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'ECRInterfaceEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.ECR,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
 
-    const ECRDockerInterfaceEndpoint = this.vpc.addInterfaceEndpoint(
-      'ECRDockerInterfaceEndpoint',
-      {
-        service: ec2.InterfaceVpcEndpointAwsService.ECR_DOCKER,
-        subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-        securityGroups: [this.privateSecurityGroup],
-      }
-    );
+    // const ECRDockerInterfaceEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'ECRDockerInterfaceEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.ECR_DOCKER,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
 
-    const STSEndpoint = this.vpc.addInterfaceEndpoint('STSEndpoint', {
-      service: ec2.InterfaceVpcEndpointAwsService.STS,
-      subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-      securityGroups: [this.privateSecurityGroup],
-    });
+    // const STSEndpoint = this.vpc.addInterfaceEndpoint('STSEndpoint', {
+    //   service: ec2.InterfaceVpcEndpointAwsService.STS,
+    //   subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //   securityGroups: [this.privateSecurityGroup],
+    // });
 
-    const ElasticLoadbalancingEndpoint = this.vpc.addInterfaceEndpoint(
-      'ElasticLoadbalancingEndpoint',
-      {
-        service: ec2.InterfaceVpcEndpointAwsService.ELASTIC_LOAD_BALANCING,
-        subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-        securityGroups: [this.privateSecurityGroup],
-      }
-    );
+    // const ElasticLoadbalancingEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'ElasticLoadbalancingEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.ELASTIC_LOAD_BALANCING,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
 
-    const CloudWatchLogsEndpoint = this.vpc.addInterfaceEndpoint(
-      'CloudWatchLogsEndpoint',
-      {
-        service: ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_LOGS,
-        subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-        securityGroups: [this.privateSecurityGroup],
-      }
-    );
+    // const CloudWatchLogsEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'CloudWatchLogsEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_LOGS,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
 
-    const SSMEndpoint = this.vpc.addInterfaceEndpoint('SSMEndpoint', {
-      service: ec2.InterfaceVpcEndpointAwsService.SSM,
-      subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-      securityGroups: [this.privateSecurityGroup],
-    });
-
-    const SSMMessagesEndpoint = this.vpc.addInterfaceEndpoint('SSMMessagesEndpoint', {
-      service: ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES,
-      subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-      securityGroups: [this.privateSecurityGroup],
-    });
-
-
-    const EC2MessagesEndpoint = this.vpc.addInterfaceEndpoint('EC2MessagesEndpoint', {
-      service: ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES,
-      subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-      securityGroups: [this.privateSecurityGroup],
-    });
-
-    const S3GatewayEndpoint = this.vpc.addGatewayEndpoint('S3GatewayEndpoint', {
-      service: ec2.GatewayVpcEndpointAwsService.S3,
-      subnets: [{ subnetType: ec2.SubnetType.PRIVATE_ISOLATED }],
-    });
+    // const S3GatewayEndpoint = this.vpc.addGatewayEndpoint('S3GatewayEndpoint', {
+    //   service: ec2.GatewayVpcEndpointAwsService.S3,
+    //   subnets: [{ subnetType: ec2.SubnetType.PRIVATE_ISOLATED }],
+    // });
   }
 }

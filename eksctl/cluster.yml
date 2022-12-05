@@ -3,17 +3,23 @@ iam:
   vpcResourceControllerPolicy: true
   withOIDC: false
 kind: ClusterConfig
-managedNodeGroups:
+metadata:
+  name: Sandbox-EKS-Cluster
+  region: ap-northeast-1
+  version: "1.24"
+nodeGroups:
 - amiFamily: Bottlerocket
   bottlerocket:
     settings: {}
+  # containerRuntime: dockerd
+  desiredCapacity: 3
   disableIMDSv1: false
   disablePodIMDS: false
   iam:
     withAddonPolicies:
       albIngress: false
-      appMesh: false
-      appMeshPreview: false
+      appMesh: null
+      appMeshPreview: null
       autoScaler: false
       awsLoadBalancerController: true
       certManager: false
@@ -27,44 +33,36 @@ managedNodeGroups:
   instanceSelector: {}
   instanceType: t3.small
   labels:
-    alpha.eksctl.io/cluster-name: EKS-Private-Sandbox-Cluster
-    alpha.eksctl.io/nodegroup-name: managed-bottlerocket-ng
-  maxSize: 2
-  minSize: 1
-  desiredCapacity: 2
-  name: managed-bottlerocket-ng
+    alpha.eksctl.io/cluster-name: Sandbox-EKS-Cluster
+    alpha.eksctl.io/nodegroup-name: Sandbox-EKS-NG
+    role: workers
+  name: Sandbox-EKS-NG
   privateNetworking: true
-  releaseVersion: ""
   securityGroups:
-    withLocal: null
-    withShared: null
+    withLocal: true
+    withShared: true
   ssh:
     allow: false
-    publicKeyPath: ""
-  tags:
-    alpha.eksctl.io/nodegroup-name: managed-bottlerocket-ng
-    alpha.eksctl.io/nodegroup-type: managed
   volumeIOPS: 3000
   volumeName: /dev/xvdb
   volumeSize: 20
   volumeThroughput: 125
   volumeType: gp3
-metadata:
-  name: EKS-Private-Sandbox-Cluster
-  region: ap-northeast-1
-  version: "1.23"
 privateCluster:
-  enabled: true
+  enabled: false
   skipEndpointCreation: true
 vpc:
+  clusterEndpoints:
+    # privateAccess: true
+    publicAccess: true
   manageSharedNodeSecurityGroupRules: true
   nat:
-    gateway: Disable
+    gateway: Enable
   subnets:
     private:
       ap-northeast-1a:
         az: ap-northeast-1a
-        id: subnet-0561f71c8daef3904
+        id: subnet-01d593820432f2083
       ap-northeast-1c:
         az: ap-northeast-1c
-        id: subnet-020b46fe950624929
+        id: subnet-0dc04dce67a20d377
