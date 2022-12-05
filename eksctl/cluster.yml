@@ -17,19 +17,19 @@ nodeGroups:
   disablePodIMDS: false
   iam:
     withAddonPolicies:
-      albIngress: false
+      albIngress: true
       appMesh: null
       appMeshPreview: null
-      autoScaler: false
+      autoScaler: true
       awsLoadBalancerController: true
       certManager: false
-      cloudWatch: false
+      cloudWatch: true
       ebs: false
       efs: false
       externalDNS: false
       fsx: false
       imageBuilder: false
-      xRay: false
+      xRay: true
   instanceSelector: {}
   instanceType: t3.small
   labels:
