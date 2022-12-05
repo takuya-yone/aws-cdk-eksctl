@@ -17,7 +17,7 @@ nodeGroups:
   disablePodIMDS: false
   iam:
     withAddonPolicies:
-      albIngress: true
+      # albIngress: true
       appMesh: null
       appMeshPreview: null
       autoScaler: true
