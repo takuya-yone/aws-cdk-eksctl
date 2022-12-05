@@ -34,9 +34,9 @@ nodeGroups:
   instanceType: t3.small
   labels:
     alpha.eksctl.io/cluster-name: Sandbox-EKS-Cluster
-    alpha.eksctl.io/nodegroup-name: Sandbox-EKS-NG
+    alpha.eksctl.io/nodegroup-name: Sandbox-EKS-NodeGroup
     role: workers
-  name: Sandbox-EKS-NG
+  name: Sandbox-EKS-NodeGroup
   privateNetworking: true
   securityGroups:
     withLocal: true
@@ -62,7 +62,7 @@ vpc:
     private:
       ap-northeast-1a:
         az: ap-northeast-1a
-        id: subnet-01d593820432f2083
+        id: subnet-0082612b34be454ad
       ap-northeast-1c:
         az: ap-northeast-1c
-        id: subnet-0dc04dce67a20d377
+        id: subnet-01705fe278224dbc6

@@ -25,11 +25,11 @@ export class EksClusterStack extends cdk.Stack {
       ManagedPolicy.fromAwsManagedPolicyName('AmazonEKSServicePolicy')
     );
 
-    const cluster = new eks.Cluster(this, 'EKS-Sandbox-cluster', {
+    const cluster = new eks.Cluster(this, 'EKS-Sandbox-Cluster', {
       vpc: vpc,
       mastersRole: EksMasterRole,
       outputMastersRoleArn: true,
-      clusterName: 'EKS-Sandbox-cluster',
+      clusterName: 'EKS-Sandbox-Cluster',
       endpointAccess: eks.EndpointAccess.PUBLIC_AND_PRIVATE,
 
       vpcSubnets: [

@@ -37,18 +37,26 @@ export class EksVpcStack extends cdk.Stack {
     // const proxyIP2 = '0.0.0.0/32';
 
     //// public security group
-    this.publicSecurityGroup = new ec2.SecurityGroup(this, 'Sandbox-EKS-PublicSG', {
-      vpc: this.vpc,
-      // allowAllOutbound: false,
-      securityGroupName: 'Sandbox-EKS-PublicSG',
-    });
+    this.publicSecurityGroup = new ec2.SecurityGroup(
+      this,
+      'Sandbox-EKS-PublicSG',
+      {
+        vpc: this.vpc,
+        // allowAllOutbound: false,
+        securityGroupName: 'Sandbox-EKS-PublicSG',
+      }
+    );
 
     //// private security group
-    this.privateSecurityGroup = new ec2.SecurityGroup(this, 'Sandbox-EKS-PrivateSG', {
-      vpc: this.vpc,
-      // allowAllOutbound: false,
-      securityGroupName: 'Sandbox-EKS-PrivateSG',
-    });
+    this.privateSecurityGroup = new ec2.SecurityGroup(
+      this,
+      'Sandbox-EKS-PrivateSG',
+      {
+        vpc: this.vpc,
+        // allowAllOutbound: false,
+        securityGroupName: 'Sandbox-EKS-PrivateSG',
+      }
+    );
 
     //// public security group Rule
     this.publicSecurityGroup.addIngressRule(
@@ -139,5 +147,6 @@ export class EksVpcStack extends cdk.Stack {
     //   service: ec2.GatewayVpcEndpointAwsService.S3,
     //   subnets: [{ subnetType: ec2.SubnetType.PRIVATE_ISOLATED }],
     // });
+
   }
 }
