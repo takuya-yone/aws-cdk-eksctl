@@ -1,10 +1,10 @@
 apiVersion: eksctl.io/v1alpha5
 iam:
   vpcResourceControllerPolicy: true
-  withOIDC: false
+  withOIDC: true
 kind: ClusterConfig
 metadata:
-  name: Sandbox-EKS-Cluster
+  name: Sandbox-EKS
   region: ap-northeast-1
   version: "1.24"
 managedNodeGroups:
@@ -31,7 +31,7 @@ managedNodeGroups:
       imageBuilder: false
       xRay: true
   instanceSelector: {}
-  instanceType: t3.small
+  instanceType: t3.medium
   labels:
     alpha.eksctl.io/cluster-name: Sandbox-EKS-Cluster
     alpha.eksctl.io/nodegroup-name: Sandbox-EKS-NodeGroup
@@ -45,7 +45,7 @@ managedNodeGroups:
     allow: false
   volumeIOPS: 3000
   volumeName: /dev/xvdb
-  volumeSize: 20
+  volumeSize: 30
   volumeThroughput: 125
   volumeType: gp3
 privateCluster:

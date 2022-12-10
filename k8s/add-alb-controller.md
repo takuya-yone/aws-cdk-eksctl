@@ -2,13 +2,14 @@ https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/aws-load-balancer-control
 
 ```Bash
 
-eksctl utils associate-iam-oidc-provider --cluster Sandbox-EKS-Cluster --approve
 
 curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/install/iam_policy.json
 
 aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy.json
+
+eksctl utils associate-iam-oidc-provider --cluster Sandbox-EKS-Cluster --approve
 
 
 eksctl create iamserviceaccount \
@@ -20,6 +21,15 @@ eksctl create iamserviceaccount \
   --approve
 
 
-  602401143452.dkr.ecr.ap-northeast-1.amazonaws.com/amazon/aws-load-balancer-controller:v2.4.4
 
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=Sandbox-EKS-Cluster \
+  --set serviceAccount.create=false \
+  --set image.repository=602401143452.dkr.ecr.ap-northeast-1.amazonaws.com/amazon/aws-load-balancer-controller \
+  --set serviceAccount.name=aws-load-balancer-controller
+  
 ```
