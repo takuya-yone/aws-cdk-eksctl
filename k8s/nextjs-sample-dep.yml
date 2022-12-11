@@ -18,7 +18,7 @@ spec:
         app: nextjs-sample
     spec:
       containers:
-      - image: {$Accountid}.dkr.ecr.ap-northeast-1.amazonaws.com/nextjs-sample:1.0.0
+      - image: {$AccountID}.dkr.ecr.ap-northeast-1.amazonaws.com/nextjs-sample:1.0.0
         name: nextjs-sample
         ports:
         - containerPort: 3000

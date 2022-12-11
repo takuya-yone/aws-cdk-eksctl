@@ -9,11 +9,11 @@ aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy.json
 
-eksctl utils associate-iam-oidc-provider --cluster Sandbox-EKS-Cluster --approve
+eksctl utils associate-iam-oidc-provider --cluster Sandbox-EKS --approve
 
 
 eksctl create iamserviceaccount \
-  --cluster=Sandbox-EKS-Cluster \
+  --cluster=Sandbox-EKS \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name "AmazonEKSLoadBalancerControllerRole" \
@@ -27,7 +27,7 @@ helm repo update
 
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
-  --set clusterName=Sandbox-EKS-Cluster \
+  --set clusterName=Sandbox-EKS \
   --set serviceAccount.create=false \
   --set image.repository=602401143452.dkr.ecr.ap-northeast-1.amazonaws.com/amazon/aws-load-balancer-controller \
   --set serviceAccount.name=aws-load-balancer-controller

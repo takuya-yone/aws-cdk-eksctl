@@ -31,7 +31,7 @@ managedNodeGroups:
       efs: false
       externalDNS: false
       fsx: false
-      imageBuilder: false
+      imageBuilder: true
       xRay: true
   instanceSelector: {}
   instanceType: t3.medium
