@@ -13,9 +13,9 @@ managedNodeGroups:
   bottlerocket:
     settings: {}
   # containerRuntime: dockerd
-  desiredCapacity: 3
+  desiredCapacity: 2
   minSize: 1
-  maxSize: 5
+  maxSize: 10
   disableIMDSv1: false
   disablePodIMDS: false
   iam:

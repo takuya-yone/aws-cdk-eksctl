@@ -6,7 +6,7 @@ metadata:
     app: nextjs-sample
   name: nextjs-sample
 spec:
-  replicas: 3
+  replicas: 60
   selector:
     matchLabels:
       app: nextjs-sample
