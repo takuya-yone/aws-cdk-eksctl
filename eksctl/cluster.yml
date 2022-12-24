@@ -8,6 +8,13 @@ metadata:
   name: Sandbox-EKS
   region: ap-northeast-1
   version: "1.24"
+  tags:
+    karpenter.sh/discovery: Sandbox-EKS
+
+karpenter:
+  version: 'v0.20.0' # Exact version must be provided
+  createServiceAccount: true # default is false
+
 managedNodeGroups:
 - amiFamily: Bottlerocket
   bottlerocket:
@@ -69,3 +76,12 @@ vpc:
       ap-northeast-1c:
         az: ap-northeast-1c
         id: subnet-01705fe278224dbc6
+
+addons:
+- name: vpc-cni
+  attachPolicyARNs:
+    - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+- name: coredns
+  version: latest
+- name: kube-proxy
+  version: latest

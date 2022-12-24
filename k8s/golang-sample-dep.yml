@@ -18,7 +18,7 @@ spec:
         app: golang-sample-dep
     spec:
       containers:
-      - image: {AccountID}.dkr.ecr.ap-northeast-1.amazonaws.com/golang-api-sandbox:1.0.2
+      - image: {$AccountID}.dkr.ecr.ap-northeast-1.amazonaws.com/golang-api-sandbox:1.0.2
         name: golang-sample-dep
         ports:
         - containerPort: 8080

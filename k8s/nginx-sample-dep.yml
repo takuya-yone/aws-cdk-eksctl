@@ -60,7 +60,6 @@ spec:
       - configMap:
           name: nginx-config
         name: nginx-config
-status: {}
 ---
 apiVersion: v1
 kind: Service

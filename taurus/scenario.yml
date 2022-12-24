@@ -1,0 +1,10 @@
+execution:
+- concurrency: 20
+  ramp-up: 0.1m
+  hold-for: 2m
+  scenario: quick-test
+
+scenarios:
+  quick-test:
+    requests:
+    - http://k8s-default-nginxsam-007de4e883-1056458455.ap-northeast-1.elb.amazonaws.com/api/article/list

@@ -6,7 +6,7 @@ eksctl create iamserviceaccount \
   --cluster=Sandbox-EKS \
   --namespace=kube-system \
   --name=cluster-autoscaler \
-  --attach-policy-arn=arn:aws:iam::{AccountID}:policy/AmazonEKSClusterAutoscalerPolicy \
+  --attach-policy-arn=arn:aws:iam::{$AccountID}:policy/AmazonEKSClusterAutoscalerPolicy \
   --override-existing-serviceaccounts \
   --approve
 ```
@@ -19,7 +19,7 @@ kubectl apply -f cluster-autoscaler-autodiscover.yaml
 ```
 kubectl annotate serviceaccount cluster-autoscaler \
   -n kube-system \
-  eks.amazonaws.com/role-arn=arn:aws:iam::{AccountID}:role/
+  eks.amazonaws.com/role-arn=arn:aws:iam::{$AccountID}:role/
   eksctl-Sandbox-EKS-addon-iamserviceaccount-k-Role1-H9QDKWT5JKM2
 ```
 
