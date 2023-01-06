@@ -12,8 +12,8 @@
     "format": "prettier --write './**/*.ts'"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.4",
-    "@types/node": "18.11.17",
+    "@types/jest": "^29.2.5",
+    "@types/node": "18.11.18",
     "@types/prettier": "2.7.2",
     "aws-cdk": "2.59.0",
     "constructs": "^10.1.211",
@@ -26,6 +26,6 @@
   "dependencies": {
     "aws-cdk-lib": "^2.59.0",
     "source-map-support": "^0.5.21",
-    "@aws-cdk/core": "1.184.1"
+    "@aws-cdk/core": "1.187.0"
   }
 }

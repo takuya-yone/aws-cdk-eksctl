@@ -25,40 +25,40 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-node-proxy-agent-v5/-/asset-node-proxy-agent-v5-2.0.38.tgz#6765bef55f95220c52decb4adba8f75c1817b0f7"
   integrity sha512-BBwAjORhuUkTGO3CxGS5Evcp5n20h9v06Sftn2R1DuSm8zIoUlPsNlI1HUk8XqYuoEI4aD7IKRQBLglv09ciJQ==
 
-"@aws-cdk/cloud-assembly-schema@1.184.1":
-  version "1.184.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cloud-assembly-schema/-/cloud-assembly-schema-1.184.1.tgz#1bd1abdeac18c3c6759afa6836f832a38bd5ee56"
-  integrity sha512-yOhSRGpA/Cm8sqTe0bejXNEseft8koFDADHYZKp7KSeRYhV0wlrbB3jqw89Ow5PHQn5hxELeLxSFhwVPwEg2Lw==
+"@aws-cdk/cloud-assembly-schema@1.187.0":
+  version "1.187.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cloud-assembly-schema/-/cloud-assembly-schema-1.187.0.tgz#d9dfdfb89bcd8c3ca7a15c83bdf2da61d325fd49"
+  integrity sha512-cvkeRFyoVJ0B2HSl2Vreq9FfX521e6oa68SBvva06123E9n2DadXFI1oum8V/ywSe3rViq+VqbUTfCYHpCHxUA==
   dependencies:
     jsonschema "^1.4.1"
     semver "^7.3.8"
 
-"@aws-cdk/core@1.184.1":
-  version "1.184.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/core/-/core-1.184.1.tgz#0d0a3ebc7efd1e2d0eeb00e19067ed461e9a71ab"
-  integrity sha512-QHuvr/Vl4YGSKChbpGdiSyK+eEUMvmhb8cqNagxOiAKUY0l8tiCOg8mBA892p+VB7zXo+JBYhQkH6PjaM++61g==
+"@aws-cdk/core@1.187.0":
+  version "1.187.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/core/-/core-1.187.0.tgz#9962eb0971884b188fe746f8bff5f4a4e085e896"
+  integrity sha512-DG8tPTQdf0HQmlopiN6PiXDiDmHuwtTru+dRLKGShPXKpBGMJNF5GCIovd4UC6Co4XtiYLe0rDW7Su3G7vwEJA==
   dependencies:
-    "@aws-cdk/cloud-assembly-schema" "1.184.1"
-    "@aws-cdk/cx-api" "1.184.1"
-    "@aws-cdk/region-info" "1.184.1"
+    "@aws-cdk/cloud-assembly-schema" "1.187.0"
+    "@aws-cdk/cx-api" "1.187.0"
+    "@aws-cdk/region-info" "1.187.0"
     "@balena/dockerignore" "^1.0.2"
     constructs "^3.3.69"
     fs-extra "^9.1.0"
     ignore "^5.2.1"
     minimatch "^3.1.2"
 
-"@aws-cdk/cx-api@1.184.1":
-  version "1.184.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cx-api/-/cx-api-1.184.1.tgz#3496d2e2e876679b5e5b49a58910578dee218585"
-  integrity sha512-f4WW9Gh9j0NJ/NpLG2HTAW9wgvd9yx1ZErsorBR8AhZI5TpoAgnOXssCFNv5GJTDoc036L02MmWzxUcnNIBt7A==
+"@aws-cdk/cx-api@1.187.0":
+  version "1.187.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cx-api/-/cx-api-1.187.0.tgz#264f85e76fedfa1045f5ff91fa2aa801effb57d5"
+  integrity sha512-TCXJ2yDlkGEpeNPDIrEg9BI8Iq57EcTXnHOnAaK+ETMX09LRyVMyNej9g4/rzCVSojTiRVmdnA9gIZ98h8ZJ4g==
   dependencies:
-    "@aws-cdk/cloud-assembly-schema" "1.184.1"
+    "@aws-cdk/cloud-assembly-schema" "1.187.0"
     semver "^7.3.8"
 
-"@aws-cdk/region-info@1.184.1":
-  version "1.184.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/region-info/-/region-info-1.184.1.tgz#74da8bf366ff707c658d93604dd94c1abb8d2377"
-  integrity sha512-e0ZSEXDjZBJBj+ITy5xtHg54Dt/IPUv5mZCe9lki7sJeUBcTDBWvS8by8nqtjXD48HXWidPpHIA2N9N6A5QQFw==
+"@aws-cdk/region-info@1.187.0":
+  version "1.187.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/region-info/-/region-info-1.187.0.tgz#29d8b77fa1bdc2141bc063a065b2270da5f7ee00"
+  integrity sha512-DkrXbqeLZcR44oUvtygFfllnb/hFUgDfElSPQVQDaDX+f67P22ABoJ7XuTyXjx6PmE3jWHXZR5roQv6rGLETpA==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6":
   version "7.18.6"
@@ -714,7 +714,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^29.2.4":
+"@types/jest@^29.2.5":
   version "29.2.5"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.2.5.tgz#c27f41a9d6253f288d1910d3c5f09484a56b73c0"
   integrity sha512-H2cSxkKgVmqNHXP7TC2L/WUorrZu8ZigyRywfVzv6EyBlxj39n4C00hjXYQWsbwqgElaj/CiAeSRmk5GoaKTgw==
@@ -722,15 +722,10 @@
     expect "^29.0.0"
     pretty-format "^29.0.0"
 
-"@types/node@*":
+"@types/node@*", "@types/node@18.11.18":
   version "18.11.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.18.tgz#8dfb97f0da23c2293e554c5a50d61ef134d7697f"
   integrity sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==
-
-"@types/node@18.11.17":
-  version "18.11.17"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.17.tgz#5c009e1d9c38f4a2a9d45c0b0c493fe6cdb4bcb5"
-  integrity sha512-HJSUJmni4BeDHhfzn6nF0sVmd1SMezP7/4F0Lq+aXzmp2xm9O7WXrUtHW/CHlYVtZUbByEvWidHqRtcJXGF2Ng==
 
 "@types/prettier@2.7.2", "@types/prettier@^2.1.5":
   version "2.7.2"
