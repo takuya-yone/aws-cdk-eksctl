@@ -1,14 +1,15 @@
-import * as cdk from '@aws-cdk/core';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import { Role, ServicePrincipal, ManagedPolicy } from '@aws-cdk/aws-iam';
-import * as eks from '@aws-cdk/aws-eks';
+import * as cdk from 'aws-cdk-lib';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import { Role, ServicePrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
+import * as eks from 'aws-cdk-lib/aws-eks';
+import { Construct } from 'constructs';
 
 export class EksVpcStack extends cdk.Stack {
   vpc: ec2.Vpc;
   publicSecurityGroup: ec2.SecurityGroup;
   privateSecurityGroup: ec2.SecurityGroup;
 
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     const vpcCidr = '10.0.0.0/16';
@@ -147,6 +148,5 @@ export class EksVpcStack extends cdk.Stack {
     //   service: ec2.GatewayVpcEndpointAwsService.S3,
     //   subnets: [{ subnetType: ec2.SubnetType.PRIVATE_ISOLATED }],
     // });
-
   }
 }

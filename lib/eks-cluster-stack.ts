@@ -1,12 +1,19 @@
-import * as cdk from '@aws-cdk/core';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import { Role, ServicePrincipal, ManagedPolicy, User } from '@aws-cdk/aws-iam';
-import * as eks from '@aws-cdk/aws-eks';
-import { Tags } from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import {
+  Role,
+  ServicePrincipal,
+  ManagedPolicy,
+  User,
+} from 'aws-cdk-lib/aws-iam';
+import * as eks from 'aws-cdk-lib/aws-eks';
+import { Tags } from 'aws-cdk-lib/core';
+import { Construct } from 'constructs';
 
 export class EksClusterStack extends cdk.Stack {
   constructor(
-    scope: cdk.Construct,
+    scope: Construct,
     id: string,
     vpc: ec2.Vpc,
     publicSecurityGroup: ec2.SecurityGroup,
