@@ -24,8 +24,10 @@
     "typescript": "~5.1.3"
   },
   "dependencies": {
+
+    "@aws-cdk/core": "1.203.0",
     "aws-cdk-lib": "^2.84.0",
-    "source-map-support": "^0.5.21",
-    "@aws-cdk/core": "1.203.0"
+    "cdk-nag": "^2.27.39",
+    "source-map-support": "^0.5.21"
   }
 }
