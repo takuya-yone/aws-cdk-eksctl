@@ -27,7 +27,7 @@ export class EksVpcStack extends cdk.Stack {
         {
           cidrMask: 24,
           name: 'private-with-nat',
-          subnetType: ec2.SubnetType.PRIVATE_WITH_NAT,
+          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
         },
       ],
     });
