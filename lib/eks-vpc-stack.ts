@@ -9,24 +9,24 @@ export class EksVpcStack extends cdk.Stack {
   publicSecurityGroup: ec2.SecurityGroup;
   privateSecurityGroup: ec2.SecurityGroup;
 
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: cdk.StackProps) {
     super(scope, id, props);
 
     const vpcCidr = '10.0.0.0/16';
 
-    this.vpc = new ec2.Vpc(this, 'Sandbox-EKS-VPC', {
-      cidr: vpcCidr,
+    this.vpc = new ec2.Vpc(this, `${id}-VPC`, {
+      ipAddresses: ec2.IpAddresses.cidr(vpcCidr),
       natGateways: 2,
       maxAzs: 2,
       subnetConfiguration: [
         {
           cidrMask: 24,
-          name: 'public',
+          name: `${id}-public`,
           subnetType: ec2.SubnetType.PUBLIC,
         },
         {
           cidrMask: 24,
-          name: 'private-with-nat',
+          name: `${id}-with-nat`,
           subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
         },
       ],
@@ -38,26 +38,18 @@ export class EksVpcStack extends cdk.Stack {
     // const proxyIP2 = '0.0.0.0/32';
 
     //// public security group
-    this.publicSecurityGroup = new ec2.SecurityGroup(
-      this,
-      'Sandbox-EKS-PublicSG',
-      {
-        vpc: this.vpc,
-        // allowAllOutbound: false,
-        securityGroupName: 'Sandbox-EKS-PublicSG',
-      }
-    );
+    this.publicSecurityGroup = new ec2.SecurityGroup(this, `${id}-PublicSG`, {
+      vpc: this.vpc,
+      // allowAllOutbound: false,
+      securityGroupName: `${id}-PublicSG`,
+    });
 
     //// private security group
-    this.privateSecurityGroup = new ec2.SecurityGroup(
-      this,
-      'Sandbox-EKS-PrivateSG',
-      {
-        vpc: this.vpc,
-        // allowAllOutbound: false,
-        securityGroupName: 'Sandbox-EKS-PrivateSG',
-      }
-    );
+    this.privateSecurityGroup = new ec2.SecurityGroup(this, `${id}-PrivateSG`, {
+      vpc: this.vpc,
+      // allowAllOutbound: false,
+      securityGroupName: `${id}-PrivateSG`,
+    });
 
     //// public security group Rule
     this.publicSecurityGroup.addIngressRule(
@@ -86,12 +78,44 @@ export class EksVpcStack extends cdk.Stack {
       this.publicSecurityGroup,
       ec2.Port.allTraffic()
     );
+    this.privateSecurityGroup.addIngressRule(
+      ec2.Peer.prefixList('pl-0596057d86614af83'),
+      ec2.Port.allTraffic()
+    );
+
     //  this.privateSecurityGroup.addIngressRule(
     //     ec2.Peer.ipv4(this.vpc.vpcCidrBlock),
     //     ec2.Port.allTraffic()
     //   );
 
     ////////////////// ////////////////// //////////////////
+
+    // const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'EC2InterfaceEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.EC2,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
+
+    // const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'EC2InterfaceEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.EC2,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
+
+    // const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
+    //   'EC2InterfaceEndpoint',
+    //   {
+    //     service: ec2.InterfaceVpcEndpointAwsService.EC2,
+    //     subnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+    //     securityGroups: [this.privateSecurityGroup],
+    //   }
+    // );
 
     // const EC2InterfaceEndpoint = this.vpc.addInterfaceEndpoint(
     //   'EC2InterfaceEndpoint',
