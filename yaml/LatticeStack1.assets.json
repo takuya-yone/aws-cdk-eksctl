@@ -1,0 +1,20 @@
+{
+  "version": "35.0.0",
+  "files": {
+    "6b01e87d2568b7f948a6a7278f5b7883175b075b376c131882c3eaf92827739a": {
+      "source": {
+        "path": "LatticeStack1.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-ap-northeast-1": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-northeast-1",
+          "objectKey": "6b01e87d2568b7f948a6a7278f5b7883175b075b376c131882c3eaf92827739a.json",
+          "region": "ap-northeast-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-ap-northeast-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

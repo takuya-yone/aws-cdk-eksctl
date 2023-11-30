@@ -1,0 +1,1945 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "LatticeStack1": {
+        "id": "LatticeStack1",
+        "path": "LatticeStack1",
+        "children": {
+          "LatticeStack1-VPC": {
+            "id": "LatticeStack1-VPC",
+            "path": "LatticeStack1/LatticeStack1-VPC",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LatticeStack1/LatticeStack1-VPC/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LatticeStack1/LatticeStack1-VPC"
+                      },
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack1-publicSubnet1": {
+                "id": "LatticeStack1-publicSubnet1",
+                "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.0.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack1-public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet1RouteTable68B93919"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet1Subnet705C733B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "LatticeStack1VPCIGW66508119"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet1RouteTable68B93919"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "LatticeStack1VPCLatticeStack1publicSubnet1EIP10F22357",
+                            "AllocationId"
+                          ]
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet1Subnet705C733B"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack1-publicSubnet2": {
+                "id": "LatticeStack1-publicSubnet2",
+                "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.1.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack1-public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet2RouteTableC576AA86"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet2Subnet1722D68B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "LatticeStack1VPCIGW66508119"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet2RouteTableC576AA86"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "LatticeStack1VPCLatticeStack1publicSubnet2EIPA8304AFA",
+                            "AllocationId"
+                          ]
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet2Subnet1722D68B"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack1-with-natSubnet1": {
+                "id": "LatticeStack1-with-natSubnet1",
+                "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.2.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack1-with-nat"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1withnatSubnet1RouteTableA22398A2"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1withnatSubnet1Subnet3972C133"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet1NATGateway7F3600DB"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1withnatSubnet1RouteTableA22398A2"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack1-with-natSubnet2": {
+                "id": "LatticeStack1-with-natSubnet2",
+                "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.3.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack1-with-nat"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack1VPC76ADE63B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1withnatSubnet2RouteTable610B320C"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1withnatSubnet2Subnet08103648"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack1/LatticeStack1-VPC/LatticeStack1-with-natSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1publicSubnet2NATGateway968F96E7"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack1VPCLatticeStack1withnatSubnet2RouteTable610B320C"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "LatticeStack1/LatticeStack1-VPC/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LatticeStack1/LatticeStack1-VPC"
+                      },
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.111.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "LatticeStack1/LatticeStack1-VPC/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "internetGatewayId": {
+                      "Ref": "LatticeStack1VPCIGW66508119"
+                    },
+                    "vpcId": {
+                      "Ref": "LatticeStack1VPC76ADE63B"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.111.0"
+            }
+          },
+          "LatticeStack1-PublicSG": {
+            "id": "LatticeStack1-PublicSG",
+            "path": "LatticeStack1/LatticeStack1-PublicSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LatticeStack1/LatticeStack1-PublicSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "LatticeStack1/LatticeStack1-PublicSG",
+                    "groupName": "LatticeStack1-PublicSG",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/32",
+                        "ipProtocol": "-1",
+                        "description": "from 0.0.0.0/32:ALL TRAFFIC"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "LatticeStack1VPC76ADE63B"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC": {
+                "id": "from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC",
+                "path": "LatticeStack1/LatticeStack1-PublicSG/from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PublicSG5588A516",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PublicSG5588A516",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC": {
+                "id": "from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC",
+                "path": "LatticeStack1/LatticeStack1-PublicSG/from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PublicSG5588A516",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PrivateSGC9C2596D",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.111.0"
+            }
+          },
+          "LatticeStack1-PrivateSG": {
+            "id": "LatticeStack1-PrivateSG",
+            "path": "LatticeStack1/LatticeStack1-PrivateSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LatticeStack1/LatticeStack1-PrivateSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "LatticeStack1/LatticeStack1-PrivateSG",
+                    "groupName": "LatticeStack1-PrivateSG",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "LatticeStack1VPC76ADE63B"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC": {
+                "id": "from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC",
+                "path": "LatticeStack1/LatticeStack1-PrivateSG/from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack1LatticeStack1PrivateSG74DD7F23:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PrivateSGC9C2596D",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PrivateSGC9C2596D",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC": {
+                "id": "from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC",
+                "path": "LatticeStack1/LatticeStack1-PrivateSG/from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack1LatticeStack1PublicSG10A0E6E6:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PrivateSGC9C2596D",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PublicSG5588A516",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              },
+              "from pl-0596057d86614af83:ALL TRAFFIC": {
+                "id": "from pl-0596057d86614af83:ALL TRAFFIC",
+                "path": "LatticeStack1/LatticeStack1-PrivateSG/from pl-0596057d86614af83:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from pl-0596057d86614af83:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack1PrivateSGC9C2596D",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourcePrefixListId": "pl-0596057d86614af83"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.111.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "LatticeStack1/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "LatticeStack1/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "LatticeStack1/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.111.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "LatticeStack1/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.111.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.111.0"
+        }
+      },
+      "LatticeStack2": {
+        "id": "LatticeStack2",
+        "path": "LatticeStack2",
+        "children": {
+          "LatticeStack2-VPC": {
+            "id": "LatticeStack2-VPC",
+            "path": "LatticeStack2/LatticeStack2-VPC",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LatticeStack2/LatticeStack2-VPC/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LatticeStack2/LatticeStack2-VPC"
+                      },
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack2-publicSubnet1": {
+                "id": "LatticeStack2-publicSubnet1",
+                "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.0.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack2-public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet1RouteTableC2C3B0D0"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet1Subnet92FB3E4C"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "LatticeStack2VPCIGWFB7B401B"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet1RouteTableC2C3B0D0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "LatticeStack2VPCLatticeStack2publicSubnet1EIP2FAD3837",
+                            "AllocationId"
+                          ]
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet1Subnet92FB3E4C"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack2-publicSubnet2": {
+                "id": "LatticeStack2-publicSubnet2",
+                "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.1.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack2-public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet2RouteTable14772A44"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet2SubnetCA7433A5"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "LatticeStack2VPCIGWFB7B401B"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet2RouteTable14772A44"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "LatticeStack2VPCLatticeStack2publicSubnet2EIP4096D031",
+                            "AllocationId"
+                          ]
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet2SubnetCA7433A5"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-publicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack2-with-natSubnet1": {
+                "id": "LatticeStack2-with-natSubnet1",
+                "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.2.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack2-with-nat"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2withnatSubnet1RouteTableC63B0B6F"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2withnatSubnet1Subnet0B5391C1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet1NATGateway192B6803"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2withnatSubnet1RouteTableC63B0B6F"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "LatticeStack2-with-natSubnet2": {
+                "id": "LatticeStack2-with-natSubnet2",
+                "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.3.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "LatticeStack2-with-nat"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "LatticeTest"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "LatticeStack2VPCDC9A60A3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2withnatSubnet2RouteTableEF483D0D"
+                        },
+                        "subnetId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2withnatSubnet2SubnetE928B4CE"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.111.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LatticeStack2/LatticeStack2-VPC/LatticeStack2-with-natSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2publicSubnet2NATGateway1B03554D"
+                        },
+                        "routeTableId": {
+                          "Ref": "LatticeStack2VPCLatticeStack2withnatSubnet2RouteTableEF483D0D"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.111.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.111.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "LatticeStack2/LatticeStack2-VPC/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LatticeStack2/LatticeStack2-VPC"
+                      },
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.111.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "LatticeStack2/LatticeStack2-VPC/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "internetGatewayId": {
+                      "Ref": "LatticeStack2VPCIGWFB7B401B"
+                    },
+                    "vpcId": {
+                      "Ref": "LatticeStack2VPCDC9A60A3"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.111.0"
+            }
+          },
+          "LatticeStack2-PublicSG": {
+            "id": "LatticeStack2-PublicSG",
+            "path": "LatticeStack2/LatticeStack2-PublicSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LatticeStack2/LatticeStack2-PublicSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "LatticeStack2/LatticeStack2-PublicSG",
+                    "groupName": "LatticeStack2-PublicSG",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/32",
+                        "ipProtocol": "-1",
+                        "description": "from 0.0.0.0/32:ALL TRAFFIC"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "LatticeStack2VPCDC9A60A3"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC": {
+                "id": "from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC",
+                "path": "LatticeStack2/LatticeStack2-PublicSG/from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PublicSG2667797B",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PublicSG2667797B",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC": {
+                "id": "from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC",
+                "path": "LatticeStack2/LatticeStack2-PublicSG/from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PublicSG2667797B",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PrivateSG0500EAB6",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.111.0"
+            }
+          },
+          "LatticeStack2-PrivateSG": {
+            "id": "LatticeStack2-PrivateSG",
+            "path": "LatticeStack2/LatticeStack2-PrivateSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LatticeStack2/LatticeStack2-PrivateSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "LatticeStack2/LatticeStack2-PrivateSG",
+                    "groupName": "LatticeStack2-PrivateSG",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "Project",
+                        "value": "LatticeTest"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "LatticeStack2VPCDC9A60A3"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC": {
+                "id": "from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC",
+                "path": "LatticeStack2/LatticeStack2-PrivateSG/from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack2LatticeStack2PrivateSGEBDBD4BA:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PrivateSG0500EAB6",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PrivateSG0500EAB6",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              },
+              "from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC": {
+                "id": "from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC",
+                "path": "LatticeStack2/LatticeStack2-PrivateSG/from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from LatticeStack2LatticeStack2PublicSG7D12F900:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PrivateSG0500EAB6",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PublicSG2667797B",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              },
+              "from pl-0596057d86614af83:ALL TRAFFIC": {
+                "id": "from pl-0596057d86614af83:ALL TRAFFIC",
+                "path": "LatticeStack2/LatticeStack2-PrivateSG/from pl-0596057d86614af83:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "from pl-0596057d86614af83:ALL TRAFFIC",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LatticeStack2PrivateSG0500EAB6",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "sourcePrefixListId": "pl-0596057d86614af83"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.111.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "LatticeStack2/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "LatticeStack2/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.111.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "LatticeStack2/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.111.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "LatticeStack2/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.111.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.111.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.111.0"
+    }
+  }
+}
